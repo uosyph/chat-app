@@ -1,0 +1,12 @@
+{% extends "parrhesia/layout.html" %}
+{% load static %}
+{% block title %}
+    Zip.it
+{% endblock %}
+{% block body %}
+    <h1 class="center">Invites</h1>
+    <div id="invites"></div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'parrhesia/invites.js' %}"></script>
+{% endblock %}

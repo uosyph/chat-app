@@ -1,0 +1,19 @@
+{% extends "parrhesia/layout.html" %}
+{% load static %}
+{% block title %}
+    Zip.it
+{% endblock %}
+{% block body %}
+    <h1 class="center">Channels</h1>
+    <div id="channels"></div>
+    <br>
+    <br>
+    <div class='center' id="addchannel">
+        <h1>Add a Channel</h1>
+        <input style='display:inline; width: 500px;' class="form-control ms-5" id="newchannelname" placeholder="Name of Channel"></input>
+        <button class='btn btn-primary' id="addchannelbtn">Add Channel</button>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'parrhesia/channels.js' %}"></script>
+{% endblock %}
