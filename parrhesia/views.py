@@ -324,3 +324,7 @@ def channelAPI(request, id):
     channel = Channel.objects.filter(id=int(id)).values()
     channel = channel[0]
     return JsonResponse(channel, safe=False)
+
+
+def page_not_found_view(request, exception):
+    return render(request, 'parrhesia/404.html', status=404)
