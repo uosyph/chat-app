@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("channel/<int:id>", views.channel, name='channel'),
-    #path("tutorial/", views.tutorial, name='tutorial'),
     path("channels", views.channels, name='channels'),
     path("invites", views.invites, name='invites'),
     path('login', views.login_view, name='login'),
@@ -23,5 +22,4 @@ urlpatterns = [
     path("api/message", views.message, name="message"),
     path("api/messages/<int:channel_id>", views.messages, name="messages"),
     path("api/channel/<int:id>", views.channelAPI, name="channel")
-
 ]

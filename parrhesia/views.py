@@ -9,33 +9,27 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
+
 def login_view(request):
     logout(request)
     print(request.GET.get('next'))
     next = request.GET.get('next')
     if request.method == "POST":
-
-        # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
 
-        # Check if authentication successful
         if user is not None:
             login(request, user)
-            #next = 0
-            #print(request.GET.get('next'))
             if not next:
                 return HttpResponseRedirect(reverse("index"))
-            else: 
+            else:
                 return HttpResponseRedirect(next)
         else:
             return render(request, "parrhesia/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
-        #print(request.GET.get('next'))
         return render(request, "parrhesia/login.html")
 
 
@@ -43,20 +37,20 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
+
 def register(request):
     logout(request)
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-        # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+
         if password != confirmation:
             return render(request, "parrhesia/register.html", {
                 "message": "Passwords must match."
             })
 
-        # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
@@ -64,43 +58,53 @@ def register(request):
             return render(request, "parrhesia/register.html", {
                 "message": "Username already taken."
             })
+
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "parrhesia/register.html")
 
+
 def index(request):
     return render(request, 'parrhesia/index.html')
 
-#@login_required(redirect_field_name=None)
+# @login_required(redirect_field_name=None)
+
+
 def channel(request, id):
     if request.user.is_authenticated:
         return render(request, 'parrhesia/channel.html')
     else:
         return render(request, 'parrhesia/error.html', {
             'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.' 
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
         })
+
+
 def invite(request):
     if request.user.is_authenticated:
-        channels_queryset = Channel_person.objects.filter(user=User(request.user.id)).values()
+        channels_queryset = Channel_person.objects.filter(
+            user=User(request.user.id)).values()
         channels = []
         for channel in channels_queryset:
-            channel_object = Channel.objects.filter(id=channel['channel_id']).values()
+            channel_object = Channel.objects.filter(
+                id=channel['channel_id']).values()
             channels.append(channel_object[0])
 
-        #print(channels)
+        # print(channels)
         return render(request, 'parrhesia/invite.html', {
             'channels': channels
         })
     else:
         return render(request, 'parrhesia/error.html', {
             'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.' 
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
         })
+
 
 def tutorial(request):
     return render(request, 'parrhesia/tutorial.html')
+
 
 def channels(request):
     if request.user.is_authenticated:
@@ -108,8 +112,9 @@ def channels(request):
     else:
         return render(request, 'parrhesia/error.html', {
             'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.' 
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
         })
+
 
 def invites(request):
     if request.user.is_authenticated:
@@ -117,25 +122,27 @@ def invites(request):
     else:
         return render(request, 'parrhesia/error.html', {
             'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.' 
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
         })
 
 # API Views
 
+
 def channelsAPI(request):
     if not request.user.is_authenticated:
         return HttpResponse(status=401)
-    channels_in = Channel_person.objects.filter(user=User(request.user.id)).values()
+    channels_in = Channel_person.objects.filter(
+        user=User(request.user.id)).values()
     channels = []
-    i=0
+    i = 0
     for channel_in in channels_in:
         channel = Channel.objects.filter(id=channel_in["channel_id"]).values()
-        #print(channel[0])
+        # print(channel[0])
         channels.append(channel[0])
-        i+=1
-
+        i += 1
 
     return JsonResponse(channels, safe=False)
+
 
 @csrf_exempt
 def newchannel(request):
@@ -143,13 +150,16 @@ def newchannel(request):
 
     if not request.user.is_authenticated:
         return HttpResponse(status=401)
-    
-    channel = Channel(creator=User(request.user.id), name=request_json.get("channel_name", ""))
+
+    channel = Channel(creator=User(request.user.id),
+                      name=request_json.get("channel_name", ""))
     channel.save()
 
-    channel_person = Channel_person(user=User(request.user.id), channel=Channel(channel.id))
+    channel_person = Channel_person(
+        user=User(request.user.id), channel=Channel(channel.id))
     channel_person.save()
     return HttpResponse(status=200)
+
 
 @csrf_exempt
 def send_invite(request):
@@ -158,59 +168,69 @@ def send_invite(request):
     if not request.user.is_authenticated:
         return HttpResponse(status=401)
 
-    recipient_object = User.objects.filter(username=request_json.get("recipient", "")).values()
-    #(recipient_object)
+    recipient_object = User.objects.filter(
+        username=request_json.get("recipient", "")).values()
+    # (recipient_object)
     #print(request_json.get("recipient", ''))
     if str(recipient_object) == '<QuerySet []>':
         return HttpResponse(status=404)
-    
+
     recipient_id = recipient_object[0]["id"]
-    
+
     # Check if user is actually in channel
     channel = request_json.get("channel", "")
-    channel_person = Channel_person.objects.filter(user=User(request.user.id), channel=Channel(channel))
-    #print(channel_person)
+    channel_person = Channel_person.objects.filter(
+        user=User(request.user.id), channel=Channel(channel))
+    # print(channel_person)
     if channel_person == []:
         return HttpResponse(status=401)
 
     # Check if user exists
-    check_recipient =  User.objects.filter(username=request_json.get("recipient", ""))
+    check_recipient = User.objects.filter(
+        username=request_json.get("recipient", ""))
     if check_recipient == []:
         return HttpResponse(status=404)
 
     # Make sure recipient is not already in channel
-    channel_person_recipient = Channel_person.objects.filter(channel=Channel(channel), user=User(recipient_id)).values()
-    
+    channel_person_recipient = Channel_person.objects.filter(
+        channel=Channel(channel), user=User(recipient_id)).values()
+
     if str(channel_person_recipient) != '<QuerySet []>':
         #('CONFLICT CONFLICT WAIT THERE IS A CONFLICT')
         #print(str(channel_person_recipient)=="<QuerySet []>")
         return HttpResponse(status=409)
 
     # Check if already sent invite
-    check_invite = Invite.objects.filter(sender=User(request.user.id), reciever=User(recipient_id), channel=Channel(channel)).values()
+    check_invite = Invite.objects.filter(sender=User(request.user.id), reciever=User(
+        recipient_id), channel=Channel(channel)).values()
     if str(check_invite) != '<QuerySet []>':
         return HttpResponse(status=409)
 
-    invite = Invite(sender=User(request.user.id), reciever=User(recipient_id), channel=Channel(channel))
+    invite = Invite(sender=User(request.user.id), reciever=User(
+        recipient_id), channel=Channel(channel))
     invite.save()
     return HttpResponse(status=200)
 
+
 def list_invites(request):
-    invites_object = Invite.objects.filter(reciever=User(request.user.id), accepted=False)
-    invites_queryset = Invite.objects.filter(reciever=User(request.user.id), accepted=False).values()
+    invites_object = Invite.objects.filter(
+        reciever=User(request.user.id), accepted=False)
+    invites_queryset = Invite.objects.filter(
+        reciever=User(request.user.id), accepted=False).values()
     invites = []
     i = 0
     for invite in invites_object:
         dict = invites_queryset[i]
-        #print(invite)
-        #print(type(invite.channel.name))
+        # print(invite)
+        # print(type(invite.channel.name))
         dict["channel_name"] = str(invite.channel.name)
         dict["channel_id"] = str(invite.channel.id)
         invites.append(dict)
-        #print('invite!')
+        # print('invite!')
         i += 1
-    #print(invites)
+    # print(invites)
     return JsonResponse(invites, safe=False)
+
 
 @csrf_exempt
 def accept_invite(request):
@@ -219,18 +239,22 @@ def accept_invite(request):
     if not request.user.is_authenticated:
         return HttpResponse(status=401)
 
-    invite = Invite.objects.filter(reciever=User(request.user.id), id=int(request_json.get("invite_id", ""))).values()
+    invite = Invite.objects.filter(reciever=User(request.user.id), id=int(
+        request_json.get("invite_id", ""))).values()
     if invite == []:
         return HttpResponse(status=404)
 
-    invite = Invite.objects.get(reciever=User(request.user.id), id=int(request_json.get("invite_id", "")))
+    invite = Invite.objects.get(reciever=User(
+        request.user.id), id=int(request_json.get("invite_id", "")))
     invite.accepted = True
     invite.save()
 
-    #print(invite.channel.name)
-    channel_person = Channel_person(user=User(request.user.id), channel=Channel(invite.channel.id))
+    # print(invite.channel.name)
+    channel_person = Channel_person(
+        user=User(request.user.id), channel=Channel(invite.channel.id))
     channel_person.save()
     return HttpResponseRedirect('/channel/'+str(invite.channel.id))
+
 
 @csrf_exempt
 def decline_invite(request):
@@ -239,13 +263,16 @@ def decline_invite(request):
     if not request.user.is_authenticated:
         return HttpResponse(status=401)
 
-    invite = Invite.objects.filter(reciever=User(request.user.id), id=request_json.get("invite_id", "")).values()
+    invite = Invite.objects.filter(reciever=User(
+        request.user.id), id=request_json.get("invite_id", "")).values()
     if invite == []:
         return HttpResponse(status=404)
-    
-    invite = Invite.objects.get(reciever=User(request.user.id), id=request_json.get("invite_id", ""))
+
+    invite = Invite.objects.get(reciever=User(
+        request.user.id), id=request_json.get("invite_id", ""))
     invite.delete()
     return HttpResponse(status=200)
+
 
 def user(request, id):
     userqueryset = User.objects.filter(id=id).values()
@@ -266,10 +293,12 @@ def message(request):
     if Channel_person.objects.filter(channel=Channel(int(channel)), user=User(request.user.id)).values()[0] == []:
         return HttpResponse(status=401)
 
-    message = Channel_message(channel=Channel(int(channel)), user=User(request.user.id), text=text)
+    message = Channel_message(channel=Channel(
+        int(channel)), user=User(request.user.id), text=text)
     message.save()
 
     return HttpResponse(status=200)
+
 
 def messages(request, channel_id):
     if not request.user.is_authenticated:
@@ -278,13 +307,15 @@ def messages(request, channel_id):
     if Channel_person.objects.filter(channel=Channel(int(channel_id)), user=User(request.user.id)).values() == '<QuerySet []>':
         return HttpResponse(status=401)
 
-    messages_queryset = Channel_message.objects.filter(channel=Channel(channel_id)).order_by('-id').values()
+    messages_queryset = Channel_message.objects.filter(
+        channel=Channel(channel_id)).order_by('-id').values()
     messages = []
     for message in messages_queryset:
         messages.append(message)
-        #print(message["text"])
-    #print(messages)
+        # print(message["text"])
+    # print(messages)
     return JsonResponse(messages, safe=False)
+
 
 def channelAPI(request, id):
     if not request.user.is_authenticated:
