@@ -140,3 +140,6 @@ dmypy.json
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+tracker/migrations/*.py
+!tracker/migrations/__init__.py
