@@ -5,9 +5,9 @@ chmod +x scripts/susr.sh
 if [[ $1 == "c" ]]; then
     ./scripts/susr.sh
 elif [[ $1 == "d" ]]; then
-    rm db.sqlite3 && rm tracker/migrations/0001_initial.py
+    rm db.sqlite3 && find parrhesia/migrations/ ! -name '__init__.py' -type f -exec rm -f {} +
 elif [[ $1 == "m" ]]; then
-    python manage.py makemigrations tracker && python manage.py migrate
+    python manage.py makemigrations parrhesia && python manage.py migrate
 elif [[ $1 == "r" ]]; then
     python manage.py runserver
 else
