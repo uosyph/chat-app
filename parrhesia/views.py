@@ -3,16 +3,74 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.db import IntegrityError
-from .models import User, Channel, Channel_person, Channel_message, Invite
-from django.core.mail import send_mail
-from django.contrib.auth.decorators import login_required
-import json
 from django.views.decorators.csrf import csrf_exempt
+import json
+
+from .models import User, Channel, Channel_person, Channel_message, Invite
+
+
+def index(request):
+    return render(request, 'parrhesia/index.html')
+
+
+def channel(request, id):
+    if request.user.is_authenticated:
+        return render(request, 'parrhesia/channel.html')
+    else:
+        return render(request, 'parrhesia/error.html', {
+            'error_header': '401 Unauthorized',
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
+        })
+
+
+def channels(request):
+    if request.user.is_authenticated:
+        return render(request, 'parrhesia/channels.html')
+    else:
+        return render(request, 'parrhesia/error.html', {
+            'error_header': '401 Unauthorized',
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
+        })
+
+
+def invite(request):
+    if request.user.is_authenticated:
+        channels_queryset = Channel_person.objects.filter(
+            user=User(request.user.id)).values()
+
+        channels = []
+        for channel in channels_queryset:
+            channel_object = Channel.objects.filter(
+                id=channel['channel_id']).values()
+            channels.append(channel_object[0])
+
+        return render(request, 'parrhesia/invite.html', {
+            'channels': channels
+        })
+    else:
+        return render(request, 'parrhesia/error.html', {
+            'error_header': '401 Unauthorized',
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
+        })
+
+
+def invites(request):
+    if request.user.is_authenticated:
+        return render(request, 'parrhesia/invites.html')
+    else:
+        return render(request, 'parrhesia/error.html', {
+            'error_header': '401 Unauthorized',
+            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
+        })
+
+
+def page_not_found_view(request, exception):
+    return render(request, 'parrhesia/404.html', status=404)
 
 
 def login_view(request):
     logout(request)
-    print(request.GET.get('next'))
+
     next = request.GET.get('next')
     if request.method == "POST":
         username = request.POST["username"]
@@ -40,6 +98,7 @@ def logout_view(request):
 
 def register(request):
     logout(request)
+
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -65,79 +124,20 @@ def register(request):
         return render(request, "parrhesia/register.html")
 
 
-def index(request):
-    return render(request, 'parrhesia/index.html')
-
-# @login_required(redirect_field_name=None)
-
-
-def channel(request, id):
-    if request.user.is_authenticated:
-        return render(request, 'parrhesia/channel.html')
-    else:
-        return render(request, 'parrhesia/error.html', {
-            'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
-        })
-
-
-def invite(request):
-    if request.user.is_authenticated:
-        channels_queryset = Channel_person.objects.filter(
-            user=User(request.user.id)).values()
-        channels = []
-        for channel in channels_queryset:
-            channel_object = Channel.objects.filter(
-                id=channel['channel_id']).values()
-            channels.append(channel_object[0])
-
-        # print(channels)
-        return render(request, 'parrhesia/invite.html', {
-            'channels': channels
-        })
-    else:
-        return render(request, 'parrhesia/error.html', {
-            'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
-        })
-
-
-def tutorial(request):
-    return render(request, 'parrhesia/tutorial.html')
-
-
-def channels(request):
-    if request.user.is_authenticated:
-        return render(request, 'parrhesia/channels.html')
-    else:
-        return render(request, 'parrhesia/error.html', {
-            'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
-        })
-
-
-def invites(request):
-    if request.user.is_authenticated:
-        return render(request, 'parrhesia/invites.html')
-    else:
-        return render(request, 'parrhesia/error.html', {
-            'error_header': '401 Unauthorized',
-            'error_discription': 'Click <a href=\'/login\'>here</a> to log in before you vist this page.'
-        })
-
-# API Views
+# ------API Views------
 
 
 def channelsAPI(request):
     if not request.user.is_authenticated:
         return HttpResponse(status=401)
+
     channels_in = Channel_person.objects.filter(
         user=User(request.user.id)).values()
+
     channels = []
     i = 0
     for channel_in in channels_in:
         channel = Channel.objects.filter(id=channel_in["channel_id"]).values()
-        # print(channel[0])
         channels.append(channel[0])
         i += 1
 
@@ -170,37 +170,30 @@ def send_invite(request):
 
     recipient_object = User.objects.filter(
         username=request_json.get("recipient", "")).values()
-    # (recipient_object)
-    #print(request_json.get("recipient", ''))
+
     if str(recipient_object) == '<QuerySet []>':
         return HttpResponse(status=404)
 
     recipient_id = recipient_object[0]["id"]
 
-    # Check if user is actually in channel
     channel = request_json.get("channel", "")
     channel_person = Channel_person.objects.filter(
         user=User(request.user.id), channel=Channel(channel))
-    # print(channel_person)
+
     if channel_person == []:
         return HttpResponse(status=401)
 
-    # Check if user exists
     check_recipient = User.objects.filter(
         username=request_json.get("recipient", ""))
     if check_recipient == []:
         return HttpResponse(status=404)
 
-    # Make sure recipient is not already in channel
     channel_person_recipient = Channel_person.objects.filter(
         channel=Channel(channel), user=User(recipient_id)).values()
 
     if str(channel_person_recipient) != '<QuerySet []>':
-        #('CONFLICT CONFLICT WAIT THERE IS A CONFLICT')
-        #print(str(channel_person_recipient)=="<QuerySet []>")
         return HttpResponse(status=409)
 
-    # Check if already sent invite
     check_invite = Invite.objects.filter(sender=User(request.user.id), reciever=User(
         recipient_id), channel=Channel(channel)).values()
     if str(check_invite) != '<QuerySet []>':
@@ -217,18 +210,15 @@ def list_invites(request):
         reciever=User(request.user.id), accepted=False)
     invites_queryset = Invite.objects.filter(
         reciever=User(request.user.id), accepted=False).values()
+
     invites = []
     i = 0
     for invite in invites_object:
         dict = invites_queryset[i]
-        # print(invite)
-        # print(type(invite.channel.name))
         dict["channel_name"] = str(invite.channel.name)
         dict["channel_id"] = str(invite.channel.id)
         invites.append(dict)
-        # print('invite!')
         i += 1
-    # print(invites)
     return JsonResponse(invites, safe=False)
 
 
@@ -249,7 +239,6 @@ def accept_invite(request):
     invite.accepted = True
     invite.save()
 
-    # print(invite.channel.name)
     channel_person = Channel_person(
         user=User(request.user.id), channel=Channel(invite.channel.id))
     channel_person.save()
@@ -312,8 +301,6 @@ def messages(request, channel_id):
     messages = []
     for message in messages_queryset:
         messages.append(message)
-        # print(message["text"])
-    # print(messages)
     return JsonResponse(messages, safe=False)
 
 
@@ -324,7 +311,3 @@ def channelAPI(request, id):
     channel = Channel.objects.filter(id=int(id)).values()
     channel = channel[0]
     return JsonResponse(channel, safe=False)
-
-
-def page_not_found_view(request, exception):
-    return render(request, 'parrhesia/404.html', status=404)
