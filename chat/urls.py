@@ -22,4 +22,4 @@ urlpatterns = [
     path('', include('parrhesia.urls'))
 ]
 
-handler404 = "tracker.views.page_not_found_view"
+handler404 = "parrhesia.views.page_not_found_view"

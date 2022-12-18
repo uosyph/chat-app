@@ -32,6 +32,7 @@ class Channel_message(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name="messages")
     text = models.TextField()
+    time = models.DateTimeField(auto_now_add=True)
     channel = models.ForeignKey(
         Channel, on_delete=models.CASCADE, related_name="channel_messages")
 
@@ -49,4 +50,4 @@ class Invite(models.Model):
     accepted = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"'{self.sender.username}' invited '{self.reciever.username}' to '{self.channel.name}'"
+        return f'"{self.sender.username}" INVITED "{self.reciever.username}" TO "{self.channel.name}"'
