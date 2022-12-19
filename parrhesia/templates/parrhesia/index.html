@@ -1,17 +1,45 @@
 {% extends "parrhesia/layout.html" %}
 {% load static %}
-{% block title %}
-    Zip.it
-{% endblock %}
+
 {% block body %}
-    {% if user.is_authenticated %}
-        <h1 class="center">Welcome to Zip.it, {{ user.username }}!</h1>
-        <!-- Getting rid of tutorial h3 class="center">If this is your first time, you can read the tutorial <a href="/tutorial">here</a>!</h3-->
-    {% else %}
-        <h1 class="center">Welcome to Zip.it!</h1>
-        <h3 class="center">It looks like you haven't logged in yet! You can log in <a href="/login">here</a>, or if you haven't created an account, you can create one by clicking on <a href="/register">this</a> link.</h3>
-    {% endif %}
+{% if user.is_authenticated %}
+<div class="center">
+    <h2 class="center" id="wlc">Welcome Back, <b>{{ user.username }}</b>!</h2>
+    <p id="con">Continue to have fun ;)</p>
+
+    <div class="btns">
+        <button class="btn center" id="start-btn">
+            <a href="/channels" style="text-decoration: none;">Your Channels</a>
+        </button>
+
+        <button class="btn center" id="rdy-btn">
+            <a href="/invite" style="text-decoration: none;">Invite a Friend!</a>
+        </button>
+    </div>
+</div>
+
+{% else %}
+<div class="center">
+    <h2 class="center" id="ft-stn">Parrhesia is a place where you can...</h2>
+    <p class="center" id="sec-stn">
+        ...belong to a school club, a gaming group, or a worldwide community.<br>Where just you and a
+        handful of friends can spend time together. A place that makes it<br>easy to talk every day and hang out more
+        often.
+    </p>
+
+    <div class="btns">
+        <button class="btn center" id="start-btn">
+            <a href="/register" style="text-decoration: none;">Get Started</a>
+        </button>
+
+        <button class="btn center" id="rdy-btn">
+            <a href="/login" style="text-decoration: none;">Already a User?</a>
+        </button>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
+
 {% block script %}
-    <script src="{% static 'parrhesia/index.js' %}"></script>
+<script src="{% static 'parrhesia/js/index.js' %}"></script>
 {% endblock %}
