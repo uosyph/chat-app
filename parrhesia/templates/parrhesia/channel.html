@@ -1,15 +1,35 @@
 {% extends "parrhesia/layout.html" %}
 {% load static %}
-{% block title %}
-    
-{% endblock %}
+
 {% block body %}
-    <div id="messages"></div>
-    <div id="newmessage" class="bottom">
-        <textarea class="form-control" id="messagetext" placeholder="Write your message here..." style="height: 100px; resize: none;"></textarea>
-        <button id="sendmessagetext" class="btn btn-primary ms-auto">Send</button>
-    </div>
+<div id="messages"></div>
+
+<div id="newmessage" class="bottom">
+    <textarea class="form-control" id="messagetext" placeholder="Write your message here..."
+        style="height: 100px; resize: none;"></textarea>
+    <button id="sendmessagetext" class="btn btn-primary ms-auto">Send</button>
+</div>
 {% endblock %}
+
 {% block script %}
-    <script src="{% static 'parrhesia/js/channel.js' %}"></script>
+<script src="{% static 'parrhesia/js/channel.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"
+    integrity="sha512-hcV6DX35BKgiTiWYrJgPbu3FxS6CsCjKgmrsPRpUPkXWbvPiKxvSVSdhWX0yXcPctOI2FJ4WP6N1zH+17B/sAA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/plugin/relativeTime.min.js"
+    integrity="sha512-MVzDPmm7QZ8PhEiqJXKz/zw2HJuv61waxb8XXuZMMs9b+an3LoqOqhOEt5Nq3LY1e4Ipbbd/e+AWgERdHlVgaA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/plugin/duration.min.js"
+    integrity="sha512-QxVJ3lAILV0RSq3wPNV5CFNyyywxd5QfA9jfGfzVViwpL/eWSi5dR1nZMc02c+QE4xz2L1eQvx/fn18RrUq9lw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock %}
+
+<!-- 
+<div id="messages"></div>
+
+<div id="newmessage" class="bottom">
+    <textarea class="form-control" id="messagetext" placeholder="Write your message here..."
+        style="height: 100px; resize: none;"></textarea>
+    <button id="sendmessagetext" class="btn btn-primary ms-auto">Send</button>
+</div>
+ -->
