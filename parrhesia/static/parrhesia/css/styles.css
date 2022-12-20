@@ -146,6 +146,20 @@ nav i:hover {
     transition: 0.3s ease;
 }
 
+.inv-btn {
+    color: #fff !important;
+    background-color: #3ab7a1 !important;
+    border-color: #3ab7a1 !important;
+    transition: 0.3s ease !important;
+    border-radius: 8px !important;
+}
+
+.inv-btn:hover {
+    background-color: #257383 !important;
+    border-color: #257383 !important;
+    transition: 0.3s ease !important;
+}
+
 .reg {
     color: rgba(255, 255, 255, 0.8);
     margin-top: 5px;
@@ -289,11 +303,99 @@ nav i:hover {
     letter-spacing: .3px;
 }
 
-/* 401 */
+/* INVITE */
+#invite_div form select:focus,
+#invite_div form select:active,
+#invite_div button:focus,
+#invite_div button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#invite_div form select {
+    padding: 8px;
+    color: #fff;
+    background-color: transparent;
+    border: #3ab7a1 solid 1px;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+#invite_div form select:hover {
+    color: #3ab7a1;
+    transition: 0.3s ease;
+}
+
+/* INVITES */
+.inv-container-box {
+    margin: auto;
+    margin-top: 38px;
+    margin-bottom: 60px;
+    padding: 40px;
+    width: 400px;
+    background: rgba(0, 0, 0, .5);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 460px) {
+    .inv-container-box {
+        width: 87%;
+    }
+}
+
+.inv-container-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
+
+/* CHANNELS */
+#addchannelbtn:focus,
+#addchannelbtn:active,
+#newchannelname:focus,
+#newchannelname:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
 
 
+#addchannel input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
 
+#addchannel label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
 
+#addchannel input:focus ~ label,
+#addchannel input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #257383;
+    font-size: 12px;
+}
+#addchannel {
+    position: relative;
+}
+
+/* CHANNEL */
 
 
 
@@ -311,24 +413,6 @@ nav i:hover {
 
 
 /* --------------------------------------------------------- */
-.cat-drop select {
-    padding: 8px;
-    color: #fff;
-    background-color: transparent;
-    border: #3ab7a1 solid 1px;
-    border-radius: 5px;
-    transition: 0.3s ease;
-}
-
-.cat-drop select:hover {
-    color: #3ab7a1;
-    transition: 0.3s ease;
-}
-
-.cat-btn {
-    margin-bottom: -27px;
-}
-
 .graytext {
     color: lightgray;
 }

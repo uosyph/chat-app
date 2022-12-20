@@ -1,0 +1,45 @@
+{% extends "parrhesia/layout.html" %}
+{% load static %}
+
+{% block title %}
+Page Not Found -
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="center">
+    <h2 class="center" id="ft-stn" style="margin-top: 100px; font-size: 100px;">404</h2>
+    <p id="sec-stn" style="margin-bottom: 35px; margin-top: 35px; font-size: 20px;">
+        The page you are looking for is not found <br> or no longer exists.
+    </p>
+
+    <div class="btns">
+        <button class="btn center" id="start-btn">
+            <a href="/" style="text-decoration: none;">Go Back Home</a>
+        </button>
+
+        <button class="btn center" id="rdy-btn">
+            <a href="/channels" style="text-decoration: none;">Go to Your Channels</a>
+        </button>
+    </div>
+</div>
+
+{% else %}
+<div class="center">
+    <h2 class="center" id="ft-stn" style="margin-top: 100px; font-size: 100px;">404</h2>
+    <p id="sec-stn" style="margin-bottom: 35px; margin-top: 35px; font-size: 20px;">
+        The page you are looking for is not found <br> or no longer exists.
+    </p>
+
+    <div class="btns">
+        <button class="btn center" id="start-btn">
+            <a href="/" style="text-decoration: none;">Go Back Home</a>
+        </button>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'parrhesia/js/index.js' %}"></script>
+{% endblock %}

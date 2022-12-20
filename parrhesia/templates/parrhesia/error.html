@@ -1,12 +1,29 @@
 {% extends "parrhesia/layout.html" %}
 {% load static %}
+
 {% block title %}
-    {{ error_header }}
+{{ error_header }} -
 {% endblock %}
+
 {% block body %}
-    <h1 class="center">{{ error_header }}</h1>
-    <h3 class="center">{{ error_discription|safe }}</h3>
+<div class="center">
+    <h2 class="center" id="ft-stn" style="margin-top: 140px; font-size: 38px;">YOU ARE NOT LOGGED IN</h2>
+    <p id="sec-stn" style="margin-bottom: 30px; margin-top: 60px;">
+        Log in or become a user to be able to visit this page.
+    </p>
+
+    <div class="btns">
+        <button class="btn center" id="start-btn">
+            <a href="/login" style="text-decoration: none;">Login</a>
+        </button>
+
+        <button class="btn center" id="rdy-btn">
+            <a href="/register" style="text-decoration: none;">Become a User!</a>
+        </button>
+    </div>
+</div>
 {% endblock %}
+
 {% block script %}
-    <script src="{% static 'parrhesia/js/index.js' %}"></script>
+<script src="{% static 'parrhesia/js/index.js' %}"></script>
 {% endblock %}

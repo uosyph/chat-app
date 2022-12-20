@@ -19,10 +19,10 @@ function load_invites() {
                 `<hr>
                 <h4 class='nobreak'>${invites[i].channel_name}</h4>
                 <br>
-                <p class='graytext'>Sent by ${user}</p>
-                <button class="right btn btn-success" onclick='accept_invite(${id},${invites[i].channel_id})' id="accept${id}">Accept</button>
+                <p class='graytext'>Sent by: ${user}</p>
+                <button style="margin-right: 10px;" class="right btn btn-success" onclick='accept_invite(${id},${invites[i].channel_id})' id="accept${id}">Accept</button>
                 <button class="right btn btn-danger" onclick='decline_invite(${id})' id="decline${id}">Decline</button>
-                <hr>`;
+                <br style="margin-bottom: 16px;">`;
                 document.querySelector('#invites').append(invite_div);
                 console.log('invite');
             });

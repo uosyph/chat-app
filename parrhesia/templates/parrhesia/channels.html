@@ -1,19 +1,30 @@
 {% extends "parrhesia/layout.html" %}
 {% load static %}
+
 {% block title %}
-    Parrhesia
+Channels -
 {% endblock %}
+
 {% block body %}
-    <h1 class="center">Channels</h1>
-    <div id="channels"></div>
-    <br>
-    <br>
-    <div class='center' id="addchannel">
-        <h1>Add a Channel</h1>
-        <input style='display:inline; width: 500px;' class="form-control ms-5" id="newchannelname" placeholder="Name of Channel"></input>
-        <button class='btn btn-primary' id="addchannelbtn">Add Channel</button>
+<div class="inv-container-box">
+    <h2 class="center">CHANNELS</h2>
+    <hr>
+
+    <h4 class="center" style="margin-top: 35px;">Add a Channel</h4>
+    <div class="form-box" id="addchannel" style="margin-top: 40px; margin-bottom: 45px;">
+        <input required name="channelname" id="newchannelname" type="text">
+        <label for="channelname">Name of Channel</label>
+
+        <button class='btn inv-btn' id="addchannelbtn" style="margin-top: -3px;">Add Channel</button>
     </div>
+
+    <hr>
+    <h4 class="center" style="margin-top: 35px; margin-bottom: 25px;">My Channels</h4>
+    <div id="channels"></div>
+    <hr>
+</div>
 {% endblock %}
+
 {% block script %}
-    <script src="{% static 'parrhesia/js/channels.js' %}"></script>
+<script src="{% static 'parrhesia/js/channels.js' %}"></script>
 {% endblock %}

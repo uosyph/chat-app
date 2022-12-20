@@ -16,7 +16,7 @@ function loadchannels() {
                 location.replace('/channel/'+result[i].id);
             })
             channeldiv.className = 'hovermouse';
-            channeldiv.innerHTML = `<hr><h4 class='center'>${result[i].name}</h4><br><hr>`;
+            channeldiv.innerHTML = `<hr><h4 class='center'>${result[i].name}</h4>`;
             document.querySelector('#channels').append(channeldiv);
             console.log(result[i]);
         }

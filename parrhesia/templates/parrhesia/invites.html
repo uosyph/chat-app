@@ -1,12 +1,18 @@
 {% extends "parrhesia/layout.html" %}
 {% load static %}
+
 {% block title %}
-    Parrhesia
+Invites -
 {% endblock %}
+
 {% block body %}
-    <h1 class="center">Invites</h1>
+<div class="inv-container-box">
+    <h2>INVITES</h2>
     <div id="invites"></div>
+    <hr>
+</div>
 {% endblock %}
+
 {% block script %}
-    <script src="{% static 'parrhesia/js/invites.js' %}"></script>
+<script src="{% static 'parrhesia/js/invites.js' %}"></script>
 {% endblock %}

@@ -1,23 +1,35 @@
 {% extends "parrhesia/layout.html" %}
 {% load static %}
+
 {% block title %}
-    Parrhesia
+Invite -
 {% endblock %}
+
 {% block body %}
-    <h1 class="center">Invite</h1>
-    <div class="center" id="invite_div">
+<div class="container-box">
+    <h2>INVITE</h2>
+
+    <div id="invite_div">
         <form>
-            <input type="text" class="form-control" id="recipient" placeholder="Username of invite recipient..."></input>
-            <select class="form-control" id="channels" name="channels">
-                <option selected disabled value="default">Select a channel...</option>
-            {% for channel in channels %}
-                <option value="{{ channel.id }}">{{ channel.name }}</option>
-            {% endfor %}
-            </select>
+            <div class="form-box">
+                <input required type="text" name="username" id="recipient">
+                <label for="username">Username of invite recipient</label>
+            </div>
+
+            <div class="form-box cat-drop" style="margin-bottom: 25px;">
+                <select class="form-control" id="channels" name="channels">
+                    <option selected disabled value="default">Select a channel</option>
+                    {% for channel in channels %}
+                    <option value="{{ channel.id }}">{{ channel.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </form>
-        <button type="submit" id="submit_invite" class="btn btn-primary">Invite</button>
+        <button type="submit" id="submit_invite" class="btn inv-btn">Invite</button>
     </div>
+</div>
 {% endblock %}
+
 {% block script %}
-    <script src="{% static 'parrhesia/js/invite.js' %}"></script>
+<script src="{% static 'parrhesia/js/invite.js' %}"></script>
 {% endblock %}
