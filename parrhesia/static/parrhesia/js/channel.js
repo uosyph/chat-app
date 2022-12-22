@@ -47,12 +47,18 @@ function load_messages() {
                     .then(response => response.json())
                     .then(username => {
                         messagediv.id = messages[i].id;
-                        messagediv.innerHTML =
-                            `<hr>
-                <p class='ms-4'>${username} said:</p>
-                <h4 class='ms-3'>${messages[i].text}</h4>
-                <small>${time}</small>
-                <hr>`;
+
+                        currentUser = document.getElementById('messages');
+                        if (username === currentUser.dataset.username) {
+                            // document.querySelector('').classList = ''
+                            messagediv.innerHTML =
+                                `${messages[i].text}<br><b style="color: red;">${username}</b>, <small>${time}</small>`;
+                        }
+                        else {
+                            // document.querySelector('').classList = ''
+                            messagediv.innerHTML =
+                                `${messages[i].text}<br><b>${username}</b>, <small>${time}</small>`;
+                        }
                     });
             }
         });
