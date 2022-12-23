@@ -143,3 +143,5 @@ dmypy.json
 
 parrhesia/migrations/*.py
 !parrhesia/migrations/__init__.py
+
+parrhesia/static/parrhesia/css/styles.css.map
