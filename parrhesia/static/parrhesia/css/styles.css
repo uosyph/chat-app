@@ -160,6 +160,21 @@ nav i:hover {
     transition: 0.3s ease !important;
 }
 
+
+.inv-btn-red {
+    color: #fff !important;
+    background-color: #B73A50 !important;
+    border-color: #B73A50 !important;
+    transition: 0.3s ease !important;
+    border-radius: 8px !important;
+}
+
+.inv-btn-red:hover {
+    background-color: #922d3f !important;
+    border-color: #922d3f !important;
+    transition: 0.3s ease !important;
+}
+
 .reg {
     color: rgba(255, 255, 255, 0.8);
     margin-top: 5px;
@@ -397,26 +412,41 @@ nav i:hover {
 }
 
 /* CHANNEL */
+#channelname {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-top: 1px;
+    margin-bottom: -18px;
+    vertical-align: middle;
+    color: #3ab7a1;
+}
+
 .--dark-theme {
     --chat-background: rgba(10, 14, 14, 0.95);
     --chat-panel-background: #131719;
     --chat-bubble-background: #14181a;
     --chat-bubble-active-background: #171a1b;
     --chat-add-button-background: #212324;
-    --chat-send-button-background: #8147fc;
+    --chat-send-button-background: #3ab7a1;
     --chat-text-color: #a3a3a3;
     --chat-options-svg: #a3a3a3;
 }
 
+.chatmessages {
+    max-height: 440px;
+    z-index: -10;
+}
+
+#messages {
+    max-height: inherit;
+}
 
 #chat {
     background: var(--chat-background);
     max-width: 600px;
-    height: 100%;
-    /* height: 550px; */
     margin: 25px auto;
     box-sizing: border-box;
-    padding: 1em;
+    padding: .8em;
     border-radius: 12px;
     position: relative;
     overflow: hidden;
@@ -588,7 +618,7 @@ nav i:hover {
     background: var(--chat-panel-background);
     border-radius: 12px;
     padding: 0 1em;
-    height: 55px;
+    height: 45px;
     margin: .5em 0 0;
 }
 
@@ -682,21 +712,51 @@ nav i:hover {
     #chat .chat__conversation-board__message__options {
         display: none !important;
     }
+
+    .chatmessages {
+        overflow-y: hidden;
+        max-height: 686px;
+    }
 }
 
 
+.mymsg,
+.otrmsg {
+    padding: 12px;
+    margin-block: 3.5px;
+    background-color: #1317195b;
+    border-radius: 8px;
+    max-width: 70%;
+    overflow-x: none;
+    word-break: break-all;
+    font-size: 17px;
+}
 
+.mymsg small,
+.otrmsg small {
+    margin-top: 1.5px;
+    font-size: 12px;
+}
 
+.otrmsg b {
+    font-size: 14px;
+}
 
+.mymsg {
+    margin-right: 3.5px;
+    margin-left: auto;
+}
 
+.otrmsg {
+    margin-left: 3.5px;
+    margin-right: auto;
+}
 
+.channelnameinv {
+    letter-spacing: .6px;
+    color: #3ab7a1;
+}
 
-
-
-
-
-
-/* --------------------------------------------------------- */
 .graytext {
     color: lightgray;
 }
@@ -727,4 +787,13 @@ nav i:hover {
     overflow: auto;
     display: flex;
     flex-direction: column-reverse;
+}
+
+.alert {
+    z-index: 100;
+    position: absolute !important;
+    background-color: #257383 !important;
+    width: 400px !important;
+    justify-content: center;
+    align-items: center;
 }

@@ -8,18 +8,20 @@ Channels -
 {% block body %}
 <div class="inv-container-box">
     <h2 class="center">CHANNELS</h2>
+
+    <div class="msg" id="alerts"></div>
     <hr>
 
-    <h4 class="center" style="margin-top: 35px;">Add a Channel</h4>
+    <h4 class="center" style="margin-top: 35px; color: #3ab7a1;">Create a Channel</h4>
     <div class="form-box" id="addchannel" style="margin-top: 40px; margin-bottom: 45px;">
         <input required name="channelname" id="newchannelname" type="text">
         <label for="channelname">Name of Channel</label>
 
-        <button class='btn inv-btn' id="addchannelbtn" style="margin-top: -3px;">Add Channel</button>
+        <button class='btn inv-btn' id="addchannelbtn" style="margin-top: -3px;">Create Channel</button>
     </div>
 
     <hr>
-    <h4 class="center" style="margin-top: 35px; margin-bottom: 25px;">My Channels</h4>
+    <h4 class="center" style="margin-top: 35px; margin-bottom: 25px; color: #3ab7a1;">My Channels</h4>
     <div id="channels"></div>
     <hr>
 </div>

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(`/api/channel/${id}`)
         .then(response => response.json())
         .then((channel) => {
+            document.querySelector('#channelname').innerHTML = channel.name;
             document.querySelector('title').innerHTML = `${channel.name} - Parrhesia`;
             document.querySelector('nav').style.position = 'fixed';
             document.querySelector('nav').style.backgroundColor = '#202026';
@@ -47,15 +48,16 @@ function load_messages() {
                     .then(response => response.json())
                     .then(username => {
                         messagediv.id = messages[i].id;
+                        messagediv.classList = 'msg';
 
                         currentUser = document.getElementById('messages');
                         if (username === currentUser.dataset.username) {
-                            // document.querySelector('').classList = ''
+                            document.querySelector('.msg').classList = 'mymsg';
                             messagediv.innerHTML =
-                                `${messages[i].text}<br><b style="color: red;">${username}</b>, <small>${time}</small>`;
+                                `${messages[i].text}<br><small>${time}</small>`;
                         }
                         else {
-                            // document.querySelector('').classList = ''
+                            document.querySelector('.msg').classList = 'otrmsg';
                             messagediv.innerHTML =
                                 `${messages[i].text}<br><b>${username}</b>, <small>${time}</small>`;
                         }
@@ -68,6 +70,14 @@ function load_messages() {
 function create_message() {
     channel_id = id;
     text = document.querySelector('#messagetext').value;
+
+    if (text.length == 0) {
+        document.getElementById('sendmessagetext').style.background = '#B73A50';
+        return;
+    }
+
+    document.getElementById('sendmessagetext').style.background = '#3ab7a1';
+
     fetch('/api/message', {
         method: 'POST',
         body: JSON.stringify({
