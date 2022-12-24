@@ -742,7 +742,7 @@ nav i:hover {
     display: none !important;
   }
   .chatmessages {
-    overflow-y: hidden;
+    overflow-y: auto;
     max-height: 686px;
   }
 }
