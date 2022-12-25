@@ -8,30 +8,6 @@ Users can sign up for an account, log in, create channels, chat in channels,
 invite users to channels, and accept or reject other users' invitations to channels.
 
 
-## Demo
-
-Youtube Video : [https://youtu.be/DdWiqYytiXo](https://youtu.be/DdWiqYytiXo)
-
-
-## Distinctiveness and Complexity
-
-This undertaking was developed entirely from scratch.
-I came up with this idea because I really wanted to do it and it seemed fun to create a chat application.
-
-This application's code is entirely based on the lessons learned in the course's videos and problem sets. My project does **not** reimplement any of the problem sets.
-
-Because it is a communication tool for texting other people, it is not a social network.
-It lacks the basic features of most social networks, such as posting, commenting, and "liking".
-Furthermore, a social network typically includes numerous networking features.
-My app is just a messaging app.
-Texting is a component of a social network, but it is not a social network in and of itself.
-
-It is also not an e-commerce site for obvious reasons, such as the fact that my application is a chat app that has nothing to do with e-commerce.
-
-My project comprises five Django models on the back-end, which exceeds the minimum of one model.
-My project uses JavaScript on the front-end and is mobile-responsive.
-
-
 ## Installation
 
 ### Get The Project
@@ -110,7 +86,7 @@ Drop Datebase
   ./tasks.sh d
 ```
 
-Conver SCSS to CSS
+Convert SCSS to CSS
 
 ```bash
   ./tasks.sh s
@@ -130,7 +106,8 @@ The application makes use of a SQLite3 database.
 
 - `parrhesia` - main application directory.
     - `static/parrhesia` contains all static content.
-        - `css` contains compiled CSS file and its map.
+        - `images` - contains favicon and logo of the application
+        - `css` - contains compiled CSS file and its map.
         - `js` - all JavaScript files used in project.
             - `channel.js` - contacts API to add and read messages in a channel.
             - `channels.js` - contacts API to list out all the channels.
@@ -152,10 +129,10 @@ The application makes use of a SQLite3 database.
     - `models.py` - database structure.
     - `admin.py` - register application models to admin.
     - `urls.py` - register all application paths.
-  - `chat` - project directory.
-  - `scripts` - this directory contains one script `susr.sh` that is used by `tasks.sh`.
-  - `tasks.sh` - some common scripts.
-  - `manage.py` - django's command-line utility for administrative tasks.
+- `chat` - project directory.
+- `scripts` - this directory contains one script `susr.sh` that is used by `tasks.sh`.
+- `tasks.sh` - some common scripts.
+- `manage.py` - django's command-line utility for administrative tasks.
 
 
 ## Tech Stack
