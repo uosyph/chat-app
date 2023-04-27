@@ -1,12 +1,9 @@
 <a name="readme-top"></a>
 
-# Parrhesia (a chat app)
+# Parrhesia
 
-Parrhesia is a web application that enables group chat between users on several channels.
-
-Users can sign up for an account, log in, create channels, chat in channels, 
-invite users to channels, and accept or reject other users' invitations to channels.
-
+Parrhesia is a Group chat web app that allows users engage in real-time conversations with other users on multiple channels.<br>
+Users can create and account, login, create new channels, invite others to channels, and accept or decline invitations from others.
 
 ## Installation
 
@@ -151,7 +148,7 @@ The application makes use of a SQLite3 database.
 * [![CSS][css.shield]][css-url]
 
 
-<p align="right">(<a href="#readme-top">Back to Top</a>)</p>
+<p align="right"><a href="#readme-top">Back to Top</a></p>
 
 [django.shield]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white
 [django-url]: https://www.djangoproject.com/
