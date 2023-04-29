@@ -1,3 +1,5 @@
+$color_1: #e6f0ea;$color_2: #3ab7a1;$color_3: #fff;$color_4: #257383;$color_5: rgba(255, 255, 255, 0.8);$color_6: #202026;$color_7: #3d9181;$color_8: #484848;$color_9: var(--chat-text-color);$color_10: lightgray;$font-family_1: Quicksand;$font-family_2: 'Lato', sans-serif;$background-color_1: #202026;$background-color_2: #3ab7a1;$background-color_3: #257383;$background-color_4: #B73A50;$background-color_5: #922d3f;$background-color_6: #fff;$background-color_7: transparent;$background-color_8: #1317195b;$background-color_9: white;
+$border-color_1: #3ab7a1;$border-color_2: #257383;$border-color_3: #B73A50;$border-color_4: #922d3f;
 @import "https://fonts.googleapis.com/css?family=Quicksand:300,regular,500,600,700";
 @import "https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic";
 @import "https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
@@ -5,14 +7,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #e6f0ea;
+    color: $color_1;
 }
 html {
     height: 100%;
 }
 body {
-    font-family: Quicksand;
-    background-color: #202026 !important;
+    font-family: $font-family_1;
+    background-color: $background-color_1 !important;
     word-break: keep-all;
     text-decoration: none;
 }
@@ -22,12 +24,12 @@ body {
 nav {
     z-index: 10;
     a {
-        color: #e6f0ea !important;
+        color: $color_1 !important;
         border: 2px solid transparent;
         border-radius: 45px;
         transition: 0.3s ease !important;
         &:hover {
-            color: #3ab7a1 !important;
+            color: $color_2 !important;
             transition: 0.3s ease !important;
         }
     }
@@ -65,11 +67,11 @@ nav {
     vertical-align: middle;
     b {
         font-size: 16px;
-        color: #3ab7a1 !important;
+        color: $color_2 !important;
     }
     a {
         &:hover {
-            color: #e6f0ea !important;
+            color: $color_1 !important;
         }
     }
 }
@@ -87,7 +89,7 @@ nav {
     h2 {
         margin: 0 0 30px;
         padding: 0;
-        color: #fff;
+        color: $color_3;
         text-align: center;
     }
     .form-box {
@@ -96,7 +98,7 @@ nav {
             width: 100%;
             padding: 10px 0;
             font-size: 16px;
-            color: #fff;
+            color: $color_3;
             margin-bottom: 30px;
             border: none;
             border-bottom: 1px solid #fff;
@@ -107,7 +109,7 @@ nav {
                     label {
                         top: -20px;
                         left: 0;
-                        color: #257383;
+                        color: $color_4;
                         font-size: 12px;
                     }
                 }
@@ -117,7 +119,7 @@ nav {
                     label {
                         top: -20px;
                         left: 0;
-                        color: #257383;
+                        color: $color_4;
                         font-size: 12px;
                     }
                 }
@@ -129,65 +131,65 @@ nav {
             left: 0;
             padding: 10px 0;
             font-size: 16px;
-            color: #fff;
+            color: $color_3;
             pointer-events: none;
             transition: .5s;
         }
     }
 }
 #submit-btn {
-    color: #fff;
-    background-color: #3ab7a1;
-    border-color: #3ab7a1;
+    color: $color_3;
+    background-color: $background-color_2;
+    border-color: $border-color_1;
     transition: 0.3s ease;
     border-radius: 8px;
     &:hover {
-        background-color: #257383;
-        border-color: #257383;
+        background-color: $background-color_3;
+        border-color: $border-color_2;
         transition: 0.3s ease;
     }
 }
 .inv-btn {
-    color: #fff !important;
-    background-color: #3ab7a1 !important;
-    border-color: #3ab7a1 !important;
+    color: $color_3 !important;
+    background-color: $background-color_2 !important;
+    border-color: $border-color_1 !important;
     transition: 0.3s ease !important;
     border-radius: 8px !important;
     &:hover {
-        background-color: #257383 !important;
-        border-color: #257383 !important;
+        background-color: $background-color_3 !important;
+        border-color: $border-color_2 !important;
         transition: 0.3s ease !important;
     }
 }
 .inv-btn-red {
-    color: #fff !important;
-    background-color: #B73A50 !important;
-    border-color: #B73A50 !important;
+    color: $color_3 !important;
+    background-color: $background-color_4 !important;
+    border-color: $border-color_3 !important;
     transition: 0.3s ease !important;
     border-radius: 8px !important;
     &:hover {
-        background-color: #922d3f !important;
-        border-color: #922d3f !important;
+        background-color: $background-color_5 !important;
+        border-color: $border-color_4 !important;
         transition: 0.3s ease !important;
     }
 }
 .reg {
-    color: rgba(255, 255, 255, 0.8);
+    color: $color_5;
     margin-top: 5px;
     margin-bottom: -5px;
     a {
-        color: #3ab7a1;
+        color: $color_2;
         text-decoration: none;
         transition: 0.3s ease;
         &:hover {
-            color: #257383;
+            color: $color_4;
             text-decoration: none;
             transition: 0.3s ease;
         }
     }
 }
 .msg {
-    color: rgba(255, 255, 255, 0.8);
+    color: $color_5;
 }
 #create-box {
     margin-top: 35px;
@@ -204,7 +206,7 @@ nav {
     font-size: 18px;
     padding-block: 10px;
     padding-inline: 40px;
-    background-color: #3ab7a1;
+    background-color: $background-color_2;
     border: 1px solid #3ab7a1;
     border-radius: 25px;
     transition: 0.3s ease;
@@ -212,12 +214,12 @@ nav {
         box-shadow: 18px 11px 47px -10px rgba(0, 0, 0, 5);
         transition: 0.3s ease;
         a {
-            color: #202026 !important;
+            color: $color_6 !important;
             transition: 0.3s ease;
         }
     }
     a {
-        color: #fff;
+        color: $color_3;
         transition: 0.3s ease;
     }
 }
@@ -229,17 +231,17 @@ nav {
     border-radius: 25px;
     transition: 0.3s ease;
     &:hover {
-        background-color: #fff;
+        background-color: $background-color_6;
         border: 1px solid #fff;
         box-shadow: 18px 11px 47px -10px rgba(0, 0, 0, 5);
         transition: 0.3s ease;
         a {
-            color: #202026 !important;
+            color: $color_6 !important;
             transition: 0.3s ease;
         }
     }
     a {
-        color: #fff !important;
+        color: $color_3 !important;
         transition: 0.3s ease;
     }
 }
@@ -247,7 +249,7 @@ nav {
     margin-top: 140px;
     b {
         margin-right: 3px;
-        color: #3d9181;
+        color: $color_7;
     }
 }
 #con {
@@ -278,13 +280,13 @@ nav {
                 box-shadow: none !important;
             }
             padding: 8px;
-            color: #fff;
-            background-color: transparent;
+            color: $color_3;
+            background-color: $background-color_7;
             border: #3ab7a1 solid 1px;
             border-radius: 5px;
             transition: 0.3s ease;
             &:hover {
-                color: #3ab7a1;
+                color: $color_2;
                 transition: 0.3s ease;
             }
         }
@@ -312,7 +314,7 @@ nav {
     h2 {
         margin: 0 0 30px;
         padding: 0;
-        color: #fff;
+        color: $color_3;
         text-align: center;
     }
 }
@@ -341,7 +343,7 @@ nav {
         width: 100%;
         padding: 10px 0;
         font-size: 16px;
-        color: #fff;
+        color: $color_3;
         margin-bottom: 30px;
         border: none;
         border-bottom: 1px solid #fff;
@@ -352,7 +354,7 @@ nav {
                 label {
                     top: -20px;
                     left: 0;
-                    color: #257383;
+                    color: $color_4;
                     font-size: 12px;
                 }
             }
@@ -362,7 +364,7 @@ nav {
                 label {
                     top: -20px;
                     left: 0;
-                    color: #257383;
+                    color: $color_4;
                     font-size: 12px;
                 }
             }
@@ -374,7 +376,7 @@ nav {
         left: 0;
         padding: 10px 0;
         font-size: 16px;
-        color: #fff;
+        color: $color_3;
         pointer-events: none;
         transition: .5s;
     }
@@ -386,7 +388,7 @@ nav {
     margin-top: 1px;
     margin-bottom: -18px;
     vertical-align: middle;
-    color: #3ab7a1;
+    color: $color_2;
 }
 .--dark-theme {
     --chat-background: rgba(10, 14, 14, 0.95);
@@ -511,7 +513,7 @@ nav {
     }
     .chat__conversation-board__message__person__nickname {
         font-size: 9px;
-        color: #484848;
+        color: $color_8;
         user-select: none;
         display: none;
     }
@@ -555,11 +557,11 @@ nav {
             word-wrap: break-word;
             background: var(--chat-bubble-background);
             font-size: 13px;
-            color: var(--chat-text-color);
+            color: $color_9;
             padding: .5em .8em;
             line-height: 1.5;
             border-radius: 6px;
-            font-family: 'Lato', sans-serif;
+            font-family: $font-family_2;
         }
         &:not(:last-child) {
             margin: 0 0 .3em;
@@ -636,18 +638,18 @@ nav {
         height: 100%;
         outline: none;
         position: relative;
-        color: var(--chat-text-color);
+        color: $color_9;
         font-size: 13px;
         background: transparent;
         border: 0;
-        font-family: 'Lato', sans-serif;
+        font-family: $font-family_2;
         resize: none;
     }
 }
 .mymsg {
     padding: 12px;
     margin-block: 3.5px;
-    background-color: #1317195b;
+    background-color: $background-color_8;
     border-radius: 8px;
     max-width: 70%;
     overflow-x: none;
@@ -663,7 +665,7 @@ nav {
 .otrmsg {
     padding: 12px;
     margin-block: 3.5px;
-    background-color: #1317195b;
+    background-color: $background-color_8;
     border-radius: 8px;
     max-width: 70%;
     overflow-x: none;
@@ -681,10 +683,10 @@ nav {
 }
 .channelnameinv {
     letter-spacing: .6px;
-    color: #3ab7a1;
+    color: $color_2;
 }
 .graytext {
-    color: lightgray;
+    color: $color_10;
 }
 .hovermouse {
     &:hover {
@@ -701,12 +703,12 @@ nav {
     position: sticky;
     bottom: 0;
     width: 100%;
-    background-color: white;
+    background-color: $background-color_9;
 }
 .alert {
     z-index: 100;
     position: absolute !important;
-    background-color: #257383 !important;
+    background-color: $background-color_3 !important;
     width: 400px !important;
     justify-content: center;
     align-items: center;
