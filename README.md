@@ -12,7 +12,7 @@ Users can create and account, login, create new channels, invite others to chann
 Clone the project
 
 ```bash
-  git clone https://github.com/yousafesaeed/chat-app.git
+  git clone https://github.com/uosyph/chat-app.git
 ```
 
 Go to the project directory
